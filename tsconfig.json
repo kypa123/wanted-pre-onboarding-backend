@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "outDir": "./dist",
+        "module": "es2020",
+        "lib": ["ES2015", "DOM", "DOM.Iterable"],
+        "typeRoots": ["./node_modules/@types", "./@types"],
+        "allowSyntheticDefaultImports": true,
+        "allowImportingTsExtensions": true,
+        "noEmit": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true
+    },
+    "include": ["./src/**/*", "./test/**/*", "./bin/*"],
+    "exclude": ["node_modules", "dist"]
+}
