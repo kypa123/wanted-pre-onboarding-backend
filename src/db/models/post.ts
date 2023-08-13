@@ -20,6 +20,6 @@ const Post = sequelize.define<Model<PostAttributes>>('Post', {
 });
 
 Post.belongsTo(User);
-User.hasMany(Post);
+User.hasMany(Post, { onDelete: 'CASCADE' });
 
 export default Post;

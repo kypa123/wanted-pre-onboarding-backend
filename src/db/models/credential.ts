@@ -14,5 +14,5 @@ const Credential = sequelize.define<Model<CredentialAttributes>>('Credential', {
 });
 
 Credential.belongsTo(User);
-User.hasOne(Credential);
+User.hasOne(Credential, { onDelete: 'CASCADE' });
 export default Credential;
