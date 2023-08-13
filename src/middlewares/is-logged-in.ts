@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { Response, NextFunction } from 'express';
-import { TokenRequest, UserToken } from '../interfaces/index.ts';
+import { TokenRequest, UserToken } from '../interfaces/jwt-token-validation.ts';
 import * as configFile from '../config/index.ts';
 
 async function isLoggedIn(
