@@ -4,6 +4,9 @@ import { UserController, PostController } from '../controller/index.ts';
 import { UserService, PostService } from '../services/index.ts';
 import { User, Post, Credential, PostContent, sequelize } from '../db/index.ts';
 import { createRouterInstance } from '../utils/useful_functions.ts';
+
+sequelize.sync();
+
 const UserRouterInstance = createRouterInstance(
     UserRouter,
     UserController,
