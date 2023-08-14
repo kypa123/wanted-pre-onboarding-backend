@@ -32,4 +32,7 @@ export default class UserController {
             res.cookie('token', result.body).status(200).json(result);
         }
     }
+    async logout(req: Request, res: Response) {
+        res.clearCookie('token').json({ message: 'logout ok' });
+    }
 }
