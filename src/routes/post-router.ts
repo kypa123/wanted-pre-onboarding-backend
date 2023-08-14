@@ -26,4 +26,7 @@ export default class PostRouter {
             asyncHandler(this.postController.deletePost),
         );
     }
+    getRouter() {
+        return this.router;
+    }
 }
