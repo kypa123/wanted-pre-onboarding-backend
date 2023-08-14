@@ -21,4 +21,8 @@ export default class UserRouter {
             asyncHandler(this.userController.deleteUser),
         );
     }
+
+    getRouter() {
+        return this.router;
+    }
 }
