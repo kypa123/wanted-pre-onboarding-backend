@@ -1,3 +1,4 @@
-import viewsRouter from './views-router.ts';
+import PostRouter from './post-router.ts';
+import UserRouter from './user-router.ts';
 
-export { viewsRouter };
+export { PostRouter, UserRouter };
