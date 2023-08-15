@@ -16,7 +16,7 @@ const PostContent = sequelize.define<Model<PostContentAttributes>>(
     },
 );
 
-PostContent.belongsTo(Post);
-Post.hasOne(PostContent, { onDelete: 'CASCADE' });
+PostContent.belongsTo(Post, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+Post.hasOne(PostContent, { foreignKey: 'user_id' });
 
 export default PostContent;
