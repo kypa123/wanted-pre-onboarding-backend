@@ -23,7 +23,9 @@ export async function login(req: Request, res: Response) {
     if (result.message == 'validationError') {
         res.status(401).json(result);
     } else {
-        res.cookie('token', result.body).status(200).json(result);
+        res.cookie('token', result.jwtToken, { httpOnly: true })
+            .status(200)
+            .json(result);
     }
 }
 export async function logout(req: Request, res: Response) {

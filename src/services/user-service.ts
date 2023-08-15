@@ -63,24 +63,24 @@ export default class UserService {
     async login(userInfo: { email: string; password: string }) {
         const result = (await this.UserModel.findOne({
             where: {
-                email: userInfo.password,
+                email: userInfo.email,
             },
             include: [this.CredentialModel],
         })) as any;
 
         const validatePassword = await bcrypt.compare(
-            result.password,
             userInfo.password,
+            result.Credential.password,
         );
         if (validatePassword) {
             const jwtToken = await jwt.sign(
-                result,
+                { id: result.id },
                 config.jwtSecret || 'secret-key',
                 {
                     expiresIn: config.jwtExpire,
                 },
             );
-            return jwtToken;
+            return { message: 'success', jwtToken };
         } else {
             return { message: 'validationError' };
         }
