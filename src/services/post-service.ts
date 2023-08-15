@@ -23,7 +23,7 @@ export default class PostService {
 
     async getPostsByOffset(offset: number) {
         return await this.PostModel.findAll({
-            offset: (offset - 1 * 5) as number,
+            offset: ((offset - 1) * 5) as number,
             limit: 5,
             include: [this.PostContentModel],
         });
