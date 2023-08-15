@@ -7,7 +7,8 @@
         "test": "npm test",
         "start": "npm run build:live",
         "build": "tsc -p .",
-        "build:live": "nodemon --watch 'src/**/*.ts' --exec ts-node-esm bin/www.ts"
+        "build:live": "nodemon --watch 'src/**/*.ts' --exec ts-node-esm bin/www.ts",
+        "seed": "ts-node-esm seeders/demo-seeder.ts"
     },
     "type": "module",
     "repository": {
