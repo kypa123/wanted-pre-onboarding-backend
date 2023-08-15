@@ -1,29 +1,20 @@
 import { Router } from 'express';
 import { isLoggedIn, asyncHandler } from '../middlewares/index.ts';
-import { PostController } from '../controller/index.ts';
+import * as postController from '../controller/post-controller.ts';
 export default class PostRouter {
     private router: Router;
-    private postController: PostController;
-    constructor(postController: PostController) {
+    constructor() {
         this.router = Router();
-        this.postController = postController;
 
-        this.router.get(
-            '/',
-            asyncHandler(this.postController.getPostsByOffset),
-        );
-        this.router.get('/id', asyncHandler(this.postController.getPostById));
-        this.router.post(
-            '/',
-            isLoggedIn,
-            asyncHandler(this.postController.addPost),
-        );
+        this.router.get('/', asyncHandler(postController.getPostsByOffset));
+        this.router.get('/id', asyncHandler(postController.getPostById));
+        this.router.post('/', isLoggedIn, asyncHandler(postController.addPost));
 
-        this.router.put('/', isLoggedIn, this.postController.updatePost);
+        this.router.put('/', isLoggedIn, postController.updatePost);
         this.router.delete(
             '/',
             isLoggedIn,
-            asyncHandler(this.postController.deletePost),
+            asyncHandler(postController.deletePost),
         );
     }
     getRouter() {

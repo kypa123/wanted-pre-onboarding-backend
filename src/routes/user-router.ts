@@ -1,24 +1,22 @@
 import { Router } from 'express';
 import { isLoggedIn, asyncHandler } from '../middlewares/index.ts';
-import { UserController } from '../controller/index.ts';
+import * as userController from '../controller/user-controller.ts';
 export default class UserRouter {
     private router: Router;
-    private userController: UserController;
-    constructor(userController: UserController) {
+    constructor() {
         this.router = Router();
-        this.userController = userController;
 
-        this.router.post('/login', asyncHandler(this.userController.login));
+        this.router.post('/login', asyncHandler(userController.login));
         this.router.post(
             '/logout',
             isLoggedIn,
-            asyncHandler(this.userController.logout),
+            asyncHandler(userController.logout),
         );
-        this.router.post('/', asyncHandler(this.userController.addUser));
+        this.router.post('/', asyncHandler(userController.addUser));
         this.router.delete(
             '/',
             isLoggedIn,
-            asyncHandler(this.userController.deleteUser),
+            asyncHandler(userController.deleteUser),
         );
     }
 
