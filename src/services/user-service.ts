@@ -1,6 +1,5 @@
 import { Sequelize } from 'sequelize';
 import { User, Credential } from '../db/index.ts';
-import { validateEmail, validatePassword } from '../utils/useful_functions.ts';
 import config from '../config/index.ts';
 import * as bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -21,29 +20,36 @@ export default class UserService {
     }
 
     async addUser(userData: { email: string; password: string }) {
-        if (
-            !(
-                validateEmail(userData.email) &&
-                validatePassword(userData.password)
-            )
-        ) {
-            return { message: 'validationError' };
-        }
-
         const transaction = await this.SequelizeInstance.transaction();
         try {
-            const user = (await this.UserModel.create({
-                email: userData.email,
-            })) as any;
-            const credential = await this.CredentialModel.create({
-                user_id: user.id,
-                password: bcrypt.hash(userData.password),
-            });
-            await transaction.commit();
-            return { user, credential };
+            const user = (await this.UserModel.create(
+                {
+                    email: userData.email,
+                },
+                { transaction },
+            )) as any;
+            try {
+                const password = await bcrypt.hash(
+                    userData.password,
+                    Number(config.bcryptSalt),
+                );
+                const credential = await this.CredentialModel.create(
+                    {
+                        user_id: user.id,
+                        password,
+                    },
+                    { transaction },
+                );
+                await transaction.commit();
+                return { user, credential };
+            } catch (err) {
+                await transaction.rollback();
+                console.log(err);
+                return { message: 'error', step: 'credential', err };
+            }
         } catch (err) {
             await transaction.rollback();
-            return err;
+            return { message: 'error', step: 'user', err };
         }
     }
     async deleteUser(userId: number) {

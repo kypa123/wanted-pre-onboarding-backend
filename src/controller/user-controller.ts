@@ -5,7 +5,7 @@ import { TokenRequest } from '../interfaces/jwt-token-validation.ts';
 export async function addUser(req: Request, res: Response) {
     const userData = req.body;
     const result = await UserServiceInstance.addUser(userData);
-    if (result.message == 'validationError') {
+    if (result.message == 'error') {
         res.status(401).json(result);
     } else {
         res.json(result);
