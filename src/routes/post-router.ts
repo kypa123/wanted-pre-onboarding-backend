@@ -6,13 +6,16 @@ export default class PostRouter {
     constructor() {
         this.router = Router();
 
-        this.router.get('/', asyncHandler(postController.getPostsByOffset));
-        this.router.get('/id', asyncHandler(postController.getPostById));
+        this.router.get(
+            '/:offset',
+            asyncHandler(postController.getPostsByOffset),
+        );
+        this.router.get('/id/:id', asyncHandler(postController.getPostById));
         this.router.post('/', isLoggedIn, asyncHandler(postController.addPost));
 
-        this.router.put('/', isLoggedIn, postController.updatePost);
+        this.router.put('/:id', isLoggedIn, postController.updatePost);
         this.router.delete(
-            '/',
+            '/:id',
             isLoggedIn,
             asyncHandler(postController.deletePost),
         );

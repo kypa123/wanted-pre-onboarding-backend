@@ -9,18 +9,18 @@ export async function addPost(req: TokenRequest, res: Response) {
     res.json(result);
 }
 export async function getPostById(req: Request, res: Response) {
-    const postId = Number(req.query.id);
+    const postId = Number(req.params.id);
     const result = await PostServiceInstance.getPostById(postId);
     res.json(result);
 }
 export async function getPostsByOffset(req: Request, res: Response) {
-    const offset = Number(req.query.offset);
+    const offset = Number(req.params.offset);
     const result = await PostServiceInstance.getPostsByOffset(offset);
     res.json(result);
 }
 export async function updatePost(req: TokenRequest, res: Response) {
     const userId = req.tokenInfo.id;
-    const postId = Number(req.query.id);
+    const postId = Number(req.params.id);
     const updatedData = req.body;
     const result = await PostServiceInstance.updatePost(
         userId,
@@ -35,7 +35,7 @@ export async function updatePost(req: TokenRequest, res: Response) {
 }
 export async function deletePost(req: TokenRequest, res: Response) {
     const userId = req.tokenInfo.id;
-    const postId = Number(req.query.id);
+    const postId = Number(req.params.id);
     const result = await PostServiceInstance.deletePost(userId, postId);
     res.json(result);
 }
