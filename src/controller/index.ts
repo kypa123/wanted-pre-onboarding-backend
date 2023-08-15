@@ -1,4 +1,4 @@
-import PostController from './post-controller.ts';
-import UserController from './user-controller.ts';
+import * as PostController from './post-controller.ts';
+import * as UserController from './user-controller.ts';
 
 export { PostController, UserController };
