@@ -13,9 +13,6 @@ const User = sequelize.define<Model<UserAttributes>>('User', {
         allowNull: false,
         unique: true,
     },
-    refreshToken: {
-        type: DataTypes.STRING,
-    },
 });
 
 export default User;
