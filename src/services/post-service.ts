@@ -92,11 +92,21 @@ export default class PostService {
     }
 
     async deletePost(userId: number, postId: number) {
-        return await this.PostModel.destroy({
+        const post = (await this.PostModel.findOne({
             where: {
                 id: postId,
-                user_id: userId,
             },
-        });
+        })) as any;
+        if (post.user_id == userId) {
+            await this.PostModel.destroy({
+                where: {
+                    id: postId,
+                    user_id: userId,
+                },
+            });
+            return { message: 'delete ok' };
+        } else {
+            return { message: 'authenticate failed' };
+        }
     }
 }

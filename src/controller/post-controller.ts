@@ -37,5 +37,9 @@ export async function deletePost(req: TokenRequest, res: Response) {
     const userId = req.tokenInfo.id;
     const postId = Number(req.params.id);
     const result = await PostServiceInstance.deletePost(userId, postId);
-    res.json(result);
+    if (result.message == 'authenticate failed') {
+        res.status(401).json(result);
+    } else {
+        res.json(result);
+    }
 }
