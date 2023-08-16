@@ -6,6 +6,7 @@ services:
             MYSQL_ROOT_PASSWORD: 11111111
             MYSQL_PASSWORD: 11111111
             MYSQL_DATABASE: mydatabase
+            MYSQL_TEST_DATABASE: testdatabase
         ports:
             - 3306:3306
         healthcheck:
