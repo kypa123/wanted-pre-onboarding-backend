@@ -10,7 +10,8 @@
    - docker compose up 커맨드 입력
      
 3. 데이터베이스 테이블 구조
-  ![스크린샷 2023-08-16 오후 8 41 28](https://github.com/kypa123/wanted-pre-onboarding-backend/assets/86966661/75d1e2cd-2e0b-487a-9903-ed49ec859313)
+![스크린샷 2023-08-16 오후 10 59 44](https://github.com/kypa123/wanted-pre-onboarding-backend/assets/86966661/47bba999-085f-46bd-a817-1c1bdb704cc5)
+
 
 4. 시현 영상<br>오라클 클라우드에 배포된 서비스로 영상을 촬영했습니다.<br>
 
