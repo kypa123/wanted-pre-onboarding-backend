@@ -15,7 +15,7 @@ async function validateUserinfo(
         if (!validateEmailResult) {
             res.status(401).json({ message: 'email validation error' });
         }
-        if (!validatePasswordResult) {
+        if (validateEmailResult && !validatePasswordResult) {
             res.status(401).json({ message: 'password validation error' });
         }
     }
