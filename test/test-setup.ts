@@ -1,11 +1,15 @@
+import sequelize from './test-environment/connection.ts';
+import app from './test-environment/app.ts';
+
 import bcrypt from 'bcrypt';
 import {
     User,
     Credential,
     Post,
     PostContent,
-    sequelize,
-} from '../src/db/index.ts';
+} from './test-environment/db/index.ts';
+
+sequelize.sync();
 
 const createSeedData = async () => {
     const users = [];
@@ -46,10 +50,4 @@ const createSeedData = async () => {
     await PostContent.bulkCreate(postContents);
 };
 
-createSeedData()
-    .then(() => {
-        console.log('Seed data created successfully.');
-    })
-    .catch(error => {
-        console.error('Error creating seed data:', error);
-    });
+export { sequelize, app, createSeedData };
